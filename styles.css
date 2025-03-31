@@ -1,0 +1,24 @@
+table {
+  border: none;
+  border-collapse: collapse;
+  background-color: lightblue;
+}
+
+table,
+td {
+  margin: 0;
+  padding: 0;
+  border: 1px solid gray;
+}
+
+td {
+  width: 14px;
+  height: 14px;
+}
+td.snake {
+  background-color: pink;
+}
+
+td.food {
+  background-color: yellow;
+}
