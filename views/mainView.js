@@ -4,12 +4,9 @@ function updateView() {
 
     if (model.app.currentPage == 'gameStart') {
         currentPageHtml = gameStartView();
-        console.log('does mainView run+')
-        console.log(currentPageHtml)
     }
     if (model.app.currentPage == 'snake') {
-        currentPageHtml = snakeView();
-        console.log(currentPageHtml)
+        currentPageHtml = initGame();
     }
-    document.getElementById('app').innerHTML = currentPageHtml;
+    document.getElementById('app').innerHTML = currentPageHtml ?? '';
 }

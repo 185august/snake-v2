@@ -39,19 +39,20 @@ function gameLoop() {
     model.game.loop = setInterval(() => {
         const isGameOver = checkIfGameOver()
         if (isGameOver) {
-            console.log('gameOver')
-            model.app.currentPage = 'gameStart';
             clearInterval(model.game.loop);
-            updateView();
+            alert('Game Over')
+            setPage('gameStart');
+            return;
+        } else {
+            snakeEatsFood();
+            moveSnake();
         }
-        snakeEatsFood();
-        moveSnake();
     }, model.game.speed);
 }
 function checkIfGameOver() {
-    if (model.snake.snakeHead.x > 30) return true;
+    if (model.snake.snakeHead.x > 29) return true;
     if (model.snake.snakeHead.x < 0) return true;
-    if (model.snake.snakeHead.y > 30) return true;
+    if (model.snake.snakeHead.y > 29) return true;
     if (model.snake.snakeHead.y < 0) return true;
 
     return false;
@@ -67,7 +68,6 @@ function userKeyInput(e) {
     } else if (e.keyCode == 68 && model.snake.direction.x != -1) { // right
         model.snake.direction = { x: 1, y: 0 };
     }
-    console.log(model.snake.direction)
 }
 
 function gameSpeedIncrease() {
