@@ -8,5 +8,8 @@ function updateView() {
     if (model.app.currentPage == 'snake') {
         currentPageHtml = initGame();
     }
-    document.getElementById('app').innerHTML = currentPageHtml ?? '';
+    document.getElementById('app').innerHTML = `
+   
+    ${currentPageHtml ?? ''}`
+
 }

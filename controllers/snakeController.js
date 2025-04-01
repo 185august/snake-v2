@@ -6,11 +6,10 @@ function increaseSnakeSize() {
     });
 }
 
-
-
 function snakeEatsFood() {
     if (model.snake.snakeHead.x == model.food.x && model.snake.snakeHead.y == model.food.y) {
         model.food = randomPosition(0, 30);
+        model.game.score++
         increaseSnakeSize();
         gameSpeedIncrease();
     }
@@ -23,14 +22,14 @@ function moveSnake() {
     model.snake.snakeHead.y += model.snake.direction.y;
 
     for (let i = 0; i < model.snake.nextBodyPart.length; i++) {
-        const temp = {
+        const tempPos = {
             x: model.snake.nextBodyPart[i].x,
             y: model.snake.nextBodyPart[i].y
         };
         model.snake.nextBodyPart[i].x = oldHeadPos.x;
         model.snake.nextBodyPart[i].y = oldHeadPos.y;
 
-        oldHeadPos = temp;
+        oldHeadPos = tempPos;
     }
 
     snakeView();

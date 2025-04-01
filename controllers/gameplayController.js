@@ -1,6 +1,6 @@
 function initGame() {
-
     model.app.currentPage = 'snake';
+
     model.snake = {
         size: 30,
         snakeHead: null,
@@ -23,12 +23,9 @@ function initGame() {
         {
             x: model.snake.snakeHead.x - 2,
             y: model.snake.snakeHead.y
-        },
-        {
-            x: model.snake.snakeHead.x - 3,
-            y: model.snake.snakeHead.y
         }
     ),
+
 
         model.food = randomPosition(0, 30);
     snakeView();
@@ -39,9 +36,6 @@ function gameLoop() {
     model.game.loop = setInterval(() => {
         const isGameOver = checkIfGameOver()
         if (isGameOver) {
-            clearInterval(model.game.loop);
-            alert('Game Over')
-            setPage('gameStart');
             return;
         } else {
             snakeEatsFood();
@@ -50,10 +44,25 @@ function gameLoop() {
     }, model.game.speed);
 }
 function checkIfGameOver() {
-    if (model.snake.snakeHead.x > 29) return true;
-    if (model.snake.snakeHead.x < 0) return true;
-    if (model.snake.snakeHead.y > 29) return true;
-    if (model.snake.snakeHead.y < 0) return true;
+    const snake = model.snake.snakeHead
+    let gameOver;
+
+    if (snake.x > 29) gameOver = true;
+    if (snake.x < 0) gameOver = true;
+    if (snake.y > 29) gameOver = true;
+    if (snake.y < 0) gameOver = true;
+    model.snake.nextBodyPart.forEach(part => {
+        if (snake.x == part.x && snake.y == part.y) {
+            gameOver = true;
+        }
+    });
+
+    if (gameOver) {
+        clearInterval(model.game.loop);
+        alert(`Game Over <br> You got a score of ${model.game.score}`)
+        setPage('gameStart');
+        return true;
+    }
 
     return false;
 }
@@ -71,10 +80,9 @@ function userKeyInput(e) {
 }
 
 function gameSpeedIncrease() {
-    model.game.score++;
     if (model.game.gameSpeedIncreaseNumber < 0) {
         model.game.speed += model.game.gameSpeedIncreaseNumber;
-        model.game.gameSpeedIncreaseNumber += 5.7;
+        model.game.gameSpeedIncreaseNumber += 5.65;
     }
 
     clearInterval(model.game.loop);
